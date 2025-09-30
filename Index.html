@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SwiftWeather-by Tarun</title>
+  <meta name="description" content="Weather app using Open-Meteo API (no key required), with caching and debounced search." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">⛅</div>
+        <h1>SwiftWeather <span class="muted"></span></h1>
+      </div>
+      <div class="controls">
+        <div class="search">
+          <input id="q" type="search" placeholder="Search city (e.g., Mumbai, London)" autocomplete="off" aria-label="Search city" />
+          <div id="suggest" class="suggest" role="listbox" aria-label="Suggestions"></div>
+        </div>
+        <label class="pill" title="Toggle °C / °F">
+          <input type="checkbox" id="unitToggle" />
+          <span>Units</span>
+          <strong id="unitText">°C</strong>
+        </label>
+        <button id="useLocation" class="pill" title="Use my location">📍 <span>Near me</span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="card" id="currentCard" aria-live="polite">
+        <div class="row">
+          <div style="flex:1 1 auto">
+            <div class="muted" id="place">—</div>
+            <div class="temp big" id="temp">—</div>
+            <div class="row muted" id="meta">—</div>
+          </div>
+          <img id="icon" alt="Weather icon" width="96" height="96" />
+        </div>
+        <div class="footer">
+          <div class="row muted" id="info">—</div>
+          <div class="tag" id="updated">—</div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="row" style="justify-content:space-between">
+          <div class="muted">7-day outlook</div>
+          <div class="notice" id="perf"></div>
+        </div>
+        <div id="daily" class="grid" aria-label="Daily forecast"></div>
+      </aside>
+
+      <section class="card" style="grid-column:1 / -1">
+        <div class="muted">Hourly (next 24h)</div>
+        <div id="hourly" class="grid" aria-label="Hourly forecast"></div>
+      </section>
+    </main>
+
+    <p class="notice">
+      Data from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>.
+      100% free, no API key required.
+    </p>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
